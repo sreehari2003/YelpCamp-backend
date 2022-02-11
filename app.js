@@ -1,20 +1,21 @@
+const app = require("./server");
 const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const camp = require("./models/campground");
-const morgan = require("morgan");
 const cities = require("./seeds/cities");
+
 app.use(express.json());
 // console.log(..camp);
 app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+
 //VIMP
 
-app.use(morgan("dev"));
 dotenv.config({ path: "./config.env" });
 //CONNECTING TO MONGOOSE
 const DB = process.env.DATABASE.replace("<password>", process.env.PASSWORD);
-// console.log(DB);
+
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -52,29 +53,16 @@ const importAll = async () => {
     console.log("error creating cities");
   }
 };
-
+app.get("/", (req, res) => {
+  res.send(
+    "<div style='height:100vh; display:grid; place-items:center;>\n<h1 style='color:red; font-size:100px; '>YELP CAMP</h1></div>"
+  );
+});
 //calling importAll
 if (process.argv[2] === "--import") {
   importAll();
 }
-
-app.get("/", (req, res) => {
-  res.render("./campgrounds/index.ejs");
-  // views\campgrounds\index.ejs
-});
-//DUMB AUTHENTICATION
-
-// app.use("/secret", (req, res, next) => {
-//   const { password } = req.query;
-//   if (process.env.PASSWORD === password) {
-//     res.send("hey you are authenticated");
-//   }
-//   next();
-// });
-
-app.use("*", (req, res) => {
-  res.send("<h1>404 ERROR</h1>");
-});
-
 const PORT = 4000;
 app.listen(PORT, () => console.log("app is running"));
+
+module.exports = app;
