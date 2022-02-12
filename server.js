@@ -3,8 +3,10 @@ const camp = require("./routes/camp");
 const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 const bodyParser = require("body-parser");
 
@@ -23,4 +25,5 @@ app.use((err, req, res, next) => {
   const code = err.statusCode;
   res.send(code);
 });
+
 module.exports = app;
