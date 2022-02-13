@@ -6,7 +6,6 @@ const camp = require("./models/campground");
 const cities = require("./seeds/cities");
 
 app.use(express.json());
-// console.log(..camp);
 app.use(express.urlencoded({ extended: true }));
 // app.use(bodyParser.urlencoded({ extended: true }));
 
