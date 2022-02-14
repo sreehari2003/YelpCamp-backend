@@ -17,7 +17,7 @@ exports.getAllCamps = async (req, res, next) => {
 };
 exports.getOneCamp = async (req, res, next) => {
   try {
-    const cmp = await camp.findById(req.params.id).populate("review");
+    const cmp = await camp.findById(req.params.id).populate("reviews");
     if (!cmp) {
       new AppError("Camp not found", 404);
       next();
