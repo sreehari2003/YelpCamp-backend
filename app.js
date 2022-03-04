@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const camp = require("./models/campground");
 const cities = require("./seeds/cities");
-
+const appError = require("./utils/appError");
 app.use(express.json());
 // console.log(..camp);
 app.use(express.urlencoded({ extended: true }));
@@ -59,6 +59,24 @@ app.get("/", (req, res) => {
   );
 });
 //calling importAll
+
+///global error handler
+app.all("*", (req, res, next) => {
+  next(new appError(`the requested url ${req.originalUrl} not found`, 404));
+});
+
+//accpeting all the errors from next() function
+
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || "error";
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
+});
+
 if (process.argv[2] === "--import") {
   importAll();
 }
