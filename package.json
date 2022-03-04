@@ -12,6 +12,7 @@
     "validator": "^13.7.0"
   },
   "scripts": {
-    "start": "nodemon app"
+    "start": "node app",
+    "dev": "nodemon app"
   }
 }
