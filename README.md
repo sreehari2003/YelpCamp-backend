@@ -43,6 +43,6 @@
 </table>
 
 <h4>to run after config file setup run</h4>
-<code>npm run dev<code/>
+<code> npm run dev <code/>
 
 <p>The webapp is currently under development</p>
