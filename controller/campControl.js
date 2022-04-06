@@ -2,6 +2,7 @@ const camp = require("../models/campground");
 const AppError = require("../utils/appError");
 const Review = require("../models/review");
 const callAsync = require("../utils/callAsync");
+
 exports.getAllCamps = callAsync(async (req, res, next) => {
   const data = await camp.find();
   if (!data) return next(new AppError("couldn't find camps", 404));
