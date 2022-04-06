@@ -3,8 +3,8 @@ const campControl = require("../controller/campControl");
 
 const router = express.Router();
 
-router.route("/camp").get(campControl.getAllCamps).post(campControl.createCamp);
-router.route("/camp/:id").get(campControl.getOneCamp);
-router.route("/camp/:id/reviews").post(campControl.createReview);
+router.route("/v1").get(campControl.getAllCamps).post(campControl.createCamp);
+router.route("/v1/:id").get(campControl.getOneCamp);
+router.route("/v1/:id/reviews").post(campControl.createReview);
 
 module.exports = router;
