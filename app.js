@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //VIMP
 
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 //CONNECTING TO MONGOOSE
 const DB = process.env.DATABASE.replace("<password>", process.env.PASSWORD);
 
@@ -59,27 +59,10 @@ app.get("/", (req, res) => {
 });
 //calling importAll
 
-///global error handler
-app.all("*", (req, res, next) => {
-  next(new appError(`the requested url ${req.originalUrl} not found`, 404));
-});
-
-//accpeting all the errors from next() function
-
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || "error";
-
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-  });
-});
-
 if (process.argv[2] === "--import") {
   importAll();
 }
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log("app is running"));
 
 module.exports = app;
