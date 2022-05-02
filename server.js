@@ -22,11 +22,20 @@ app.use(cors(corsOptions));
 app.use("/api/camp", camp);
 app.use("/api/auth", auth);
 
+///global error handler
+app.all("*", (req, res, next) => {
+  next(new appError(`the requested url ${req.originalUrl} not found`, 404));
+});
+
+//accpeting all the errors from next() function
+
 app.use((err, req, res, next) => {
-  const code = err.statusCode;
-  res.status(code).json({
-    ok: false,
-    message: "could complete the request",
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || "error";
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
   });
 });
 

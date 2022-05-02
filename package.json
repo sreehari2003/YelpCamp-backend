@@ -10,6 +10,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.2",
     "morgan": "^1.10.0",
+    "passport": "^0.5.2",
+    "passport-google-oauth2": "^0.2.0",
     "validator": "^13.7.0"
   },
   "scripts": {
