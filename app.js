@@ -63,6 +63,6 @@ if (process.argv[2] === "--import") {
   importAll();
 }
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log("app is running"));
+app.listen(PORT, () => console.log("app is running on port" + PORT));
 
 module.exports = app;
