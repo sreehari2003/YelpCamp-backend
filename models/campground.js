@@ -15,6 +15,14 @@ const campGroundSchema = new Schema({
     required: [true, "should have a location"],
     type: String,
   },
+  latitude: {
+    required: [true, "should have a latitude"],
+    type: Number,
+  },
+  longitude: {
+    required: [true, "should have a longitude"],
+    type: Number,
+  },
   image: {
     required: [true, "should have a image"],
     type: String,

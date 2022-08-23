@@ -1,10 +1,11 @@
+const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
+const cors = require("cors");
 const express = require("express");
 const camp = require("./routes/camp");
 const auth = require("./routes/auth");
-const cors = require("cors");
+const appError = require("./utils/appError");
 const app = express();
-const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
 
 app.use(morgan("dev"));
 app.use(cookieParser());

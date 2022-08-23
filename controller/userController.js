@@ -11,8 +11,10 @@ const createToken = (id) => {
 
 exports.newUser = catchAsync(async (req, res, next) => {
   const { password, name, passwordConfirm, email } = req.body;
-  if (!email || !password || !passwordConfirm || !name)
+  console.log(req.body);
+  if (!email || !password || !passwordConfirm || !name) {
     return next(new appError("Data input missing", 404));
+  }
   const obj = { email, password, name, passwordConfirm };
   const resp = await User.create(obj);
   const token = createToken(resp._id);
